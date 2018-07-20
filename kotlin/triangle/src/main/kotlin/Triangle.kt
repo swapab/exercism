@@ -1,7 +1,7 @@
-class Triangle(side1: Double, side2: Double, side3: Double) {
-    var isEquilateral: Boolean = false
-    var isIsosceles: Boolean = false
-    var isScalene: Boolean = false
+class Triangle(val side1: Double, val side2: Double, val side3: Double) {
+    val isEquilateral: Boolean by lazy { side2 == side1 && side1 == side3 }
+    val isIsosceles: Boolean by lazy { side2 == side3 || side1 == side2 || side1 == side3 }
+    val isScalene: Boolean by lazy { side1 != side2 && side1 != side3 }
 
     constructor(side1: Int, side2: Int, side3: Int): this(side1 = side1.toDouble(), side2 = side2.toDouble(), side3 = side3.toDouble()){}
 
@@ -14,11 +14,5 @@ class Triangle(side1: Double, side2: Double, side3: Double) {
 
         if(side2.plus(side3) <= side1)
             throw IllegalArgumentException()
-
-        isEquilateral = side1 == side2 && side1 == side3
-
-        isIsosceles = side2 == side3 || side1 == side2 || side1 == side3
-
-        isScalene = side1 != side2 && side1 != side3
     }
 }
